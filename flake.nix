@@ -16,7 +16,7 @@
   } @ inputs: let
     inherit (self) outputs;
     systems = [
-      "x85_64-linux"
+      "x86_64-linux"
     ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
@@ -34,7 +34,7 @@
       finian = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
 	extraSpecialArgs = { inherit inputs outputs; };
-	modules = [ ./home/finian/finian.nix ];
+	modules = [ ./home/finian/finian-laptop.nix ];
       };
     };
   };

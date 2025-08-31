@@ -9,9 +9,9 @@
   home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
   home.packages = [];
-  home.file = [];
+  home.file = {};
 
-  home.sessionVariables = [];
+  home.sessionVariables = {};
 
   programs.home-manager.enable = true;
 
