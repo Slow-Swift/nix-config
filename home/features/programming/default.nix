@@ -3,7 +3,6 @@
   ...
 }: {
   imports = [
-    ./minecraft.nix
-    ./archipelago.nix
+    ./r.nix
   ];
 }

@@ -13,6 +13,14 @@
 
   home.packages = with pkgs; [
     discord
+    teams-for-linux
+    zotero
+    libreoffice-qt-fresh
+    hunspell
+    hunspellDicts.en_CA
+    poptracker
+    nestopia-ue
+    obsidian
   ];
   home.file = {};
 

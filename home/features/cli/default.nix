@@ -4,6 +4,7 @@
 }: {
   imports = [
     ./fish.nix
+    ./fzf.nix
   ];
 
   programs.zoxide = {
@@ -20,6 +21,11 @@
 
   programs.bat = {
     enable = true;
+  };
+
+  programs.ghostty = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   home.packages = with pkgs; [
