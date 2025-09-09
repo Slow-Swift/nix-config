@@ -21,6 +21,7 @@
     poptracker
     nestopia-ue
     obsidian
+    inkscape
   ];
   home.file = {};
 
