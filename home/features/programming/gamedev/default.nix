@@ -3,7 +3,6 @@
   ...
 }: {
   imports = [
-    ./r.nix
-    ./gamedev
+    ./godot.nix
   ];
 }

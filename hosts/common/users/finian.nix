@@ -10,6 +10,8 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "kvm"
+      "adbusers"
     ];
 
     packages = [ inputs.home-manager.packages.${pkgs.system}.default ];

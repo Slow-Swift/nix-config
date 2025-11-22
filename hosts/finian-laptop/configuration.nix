@@ -23,11 +23,44 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  services.udev.extraRules = ''
+    KERNEL=="ttyUSB[0-9]*", MODE="0666"
+  '';
+  
+
   # Set your time zone.
   time.timeZone = "America/Vancouver";
-
+  environment.variables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    GLFW_IM_MODULE = "ibus"; # for some Wayland apps (optional)
+  };
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_CA.UTF-8";
+  i18n = {
+    defaultLocale = "en_CA.UTF-8";
+    inputMethod = {
+      type = "fcitx5";
+      enable = true;
+      fcitx5 = {
+          waylandFrontend = true;
+          addons = with pkgs; [
+            fcitx5-mozc
+          ];
+          settings = {
+            inputMethod = {
+              "Groups/0" = {
+                Name = "Default";
+                "Default Layout" = "us";
+                "DefaultIM" = "keyboard-us";
+              };
+              "Groups/0/Items/0".Name = "keyboard-us";
+              "Groups/0/Items/1".Name = "mozc";
+            };
+          };
+        };
+    };
+  };
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -81,9 +114,11 @@
   users.users.finian = {
     isNormalUser = true;
     description = "Finian";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "adbusers"];
     packages = with pkgs; [];
   };
+
+  programs.adb.enable = true;
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -92,6 +127,7 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
+    protontricks.enable = true;
   };
 
   # Allow unfree packages
@@ -105,7 +141,17 @@
      jdk
      wl-clipboard
      xclip
+     gcc
+     unzip
+     python3
+     maven
+     android-studio
   ];
+
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16*1024; # 16 GB
+  }]; 
 
   programs.fish.enable = true;
 

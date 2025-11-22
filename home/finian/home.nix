@@ -10,8 +10,16 @@
 
   home.username = lib.mkDefault "finian";
   home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
+  fonts.fontconfig.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   home.packages = with pkgs; [
+    stellarium
+    zoom-us
     discord
     teams-for-linux
     zotero
@@ -22,10 +30,20 @@
     nestopia-ue
     obsidian
     inkscape
+    nerd-fonts.fira-code
+    corefonts
+    vscode.fhs
+    logisim-evolution
+    owmods-gui
+    (pkgs.writeShellScriptBin "new-java-project" (builtins.readFile ../scripts/new-java-project.sh))
   ];
   home.file = {};
 
   home.sessionVariables = {};
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
 
   programs.home-manager.enable = true;
 

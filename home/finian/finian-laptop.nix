@@ -23,6 +23,7 @@
 
     programming = {
       r.enable = true;
+      gamedev.godot.enable = true;
     };
 
   };
