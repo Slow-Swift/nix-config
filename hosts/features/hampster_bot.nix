@@ -1,0 +1,6 @@
+{}:
+{
+  services.udev.extraRules = ''
+    KERNEL=="ttyUSB[0-9]*", MODE="0666"
+  '';
+}

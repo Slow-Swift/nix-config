@@ -19,6 +19,7 @@
     hardinfo2
     vlc
     wayland-utils
+    xclip
     wl-clipboard
     libsForQt5.qtstyleplugin-kvantum
   ];

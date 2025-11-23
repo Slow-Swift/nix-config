@@ -7,108 +7,20 @@
 {
   imports =
     [
+      ../nixosModules/common
+    
       ./hardware-configuration.nix
       ../features/plasma.nix
+      ../features/fcitx.nix
+      ../features/hampster_bot.nix
+      ../features/android.nix
+      ../features/steam.nix
     ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   networking.hostName = "finian-laptop"; # Define your hostname.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  services.udev.extraRules = ''
-    KERNEL=="ttyUSB[0-9]*", MODE="0666"
-  '';
   
-
   # Set your time zone.
   time.timeZone = "America/Vancouver";
-  environment.variables = {
-    GTK_IM_MODULE = "fcitx";
-    QT_IM_MODULE = "fcitx";
-    XMODIFIERS = "@im=fcitx";
-    GLFW_IM_MODULE = "ibus"; # for some Wayland apps (optional)
-  };
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_CA.UTF-8";
-    inputMethod = {
-      type = "fcitx5";
-      enable = true;
-      fcitx5 = {
-          waylandFrontend = true;
-          addons = with pkgs; [
-            fcitx5-mozc
-          ];
-          settings = {
-            inputMethod = {
-              "Groups/0" = {
-                Name = "Default";
-                "Default Layout" = "us";
-                "DefaultIM" = "keyboard-us";
-              };
-              "Groups/0/Items/0".Name = "keyboard-us";
-              "Groups/0/Items/1".Name = "mozc";
-            };
-          };
-        };
-    };
-  };
-
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  services.syncthing = {
-    enable = true;
-    dataDir = "/home/finian/";
-    openDefaultPorts = true;
-    user = "finian";
-    group = "users";
-  };
-
-  services.blueman.enable = true;
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings.General.Experimental = true; # Show battery charge of Bluetooth devices
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.finian = {
@@ -118,42 +30,16 @@
     packages = with pkgs; [];
   };
 
-  programs.adb.enable = true;
-
-  # Install firefox.
-  programs.firefox.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-    protontricks.enable = true;
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      neovim
      git
      jdk
-     wl-clipboard
-     xclip
      gcc
      unzip
      python3
-     maven
-     android-studio
   ];
-
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16*1024; # 16 GB
-  }]; 
-
-  programs.fish.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
