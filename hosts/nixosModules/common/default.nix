@@ -45,7 +45,14 @@
     ];
   };
 
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+    "9.9.9.9"
+  ];
   networking.networkmanager.enable = true;
+  networking.networkmanager.dns = "systemd-resolved";	
+  services.resolved.enable = true;
   
   i18n.defaultLocale = "en_US.UTF-8";
 

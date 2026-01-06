@@ -8,6 +8,7 @@
     ../features/cli
     ../features/games
     ../features/programming
+    ../features/desktop/kde.nix
   ];
 
   features = {

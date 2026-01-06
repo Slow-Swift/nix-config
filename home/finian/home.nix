@@ -18,7 +18,12 @@
   };
 
   home.packages = with pkgs; [
+    unityhub
+    anki
+    zathura
     stellarium
+    texlive.combined.scheme-medium
+    pstoedit
     zoom-us
     discord
     teams-for-linux
@@ -26,11 +31,13 @@
     libreoffice-qt-fresh
     hunspell
     hunspellDicts.en_CA
+    hunspellDicts.en_US
     poptracker
     nestopia-ue
     obsidian
     inkscape
     nerd-fonts.fira-code
+    cm_unicode
     corefonts
     vscode.fhs
     logisim-evolution

@@ -30,6 +30,9 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    username = "finian";
+    host = "finian-laptop";
     
     systems = [
       "x86_64-linux"
@@ -41,17 +44,17 @@
     overlays = import ./overlays {inherit inputs;};
     
     nixosConfigurations = {
-      finian-laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
-	      modules = [ ./hosts/finian-laptop ];
+      ${host} = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs username host; };
+	modules = [ ./hosts/${host} ];
       };
     };
 
     homeConfigurations = {
-      finian = home-manager.lib.homeManagerConfiguration {
+      ${username} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-	      extraSpecialArgs = { inherit inputs outputs; };
-	      modules = [ ./home/finian/finian-laptop.nix ];
+	  extraSpecialArgs = { inherit inputs outputs; };
+	  modules = [ ./home/finian/${host}.nix ];
       };
     };
   };

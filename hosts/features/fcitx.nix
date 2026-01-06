@@ -14,6 +14,7 @@
 
       fcitx5 = {
           waylandFrontend = true;
+	  ignoreUserConfig = true;
           addons = with pkgs; [
             fcitx5-mozc
           ];
@@ -26,6 +27,7 @@
               };
               "Groups/0/Items/0".Name = "keyboard-us";
               "Groups/0/Items/1".Name = "mozc";
+	      "Groups/0/Items/2".Name = "keyboard-gr-polytonic";
             };
           };
         };

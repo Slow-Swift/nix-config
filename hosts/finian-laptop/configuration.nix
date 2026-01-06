@@ -15,7 +15,17 @@
       ../features/hampster_bot.nix
       ../features/android.nix
       ../features/steam.nix
+      ../features/syncthing.nix
     ];
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 ];
+    allowedUDPPortRanges = [
+      { from = 4000; to = 4007; }
+      { from = 8000; to = 8010; }
+    ];
+  };
 
   networking.hostName = "finian-laptop"; # Define your hostname.
   
