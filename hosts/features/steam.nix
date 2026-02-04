@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.steam = {
     enable = true;
@@ -7,4 +7,6 @@
     localNetworkGameTransfers.openFirewall = true;
     protontricks.enable = true;
   };
+
+  hardware.steam-hardware.enable = true;
 }

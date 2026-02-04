@@ -18,6 +18,8 @@
       ../features/syncthing.nix
     ];
 
+    services.flatpak.enable = true;
+
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 80 443 ];
@@ -43,6 +45,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     dpkg
+     alvr
      neovim
      git
      jdk

@@ -5,6 +5,12 @@
   inputs,
   ...
 }:
+let
+  tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-medium
+    todonotes csquotes import xifthen pdfpages transparent;
+  });
+in
 {
   imports = [ inputs.zen-browser.homeModules.twilight ];
 
@@ -18,11 +24,15 @@
   };
 
   home.packages = with pkgs; [
+    tex
     unityhub
+    libresprite
+    audacity
+    openxr-loader
+    dotnet-sdk_9
     anki
     zathura
     stellarium
-    texlive.combined.scheme-medium
     pstoedit
     zoom-us
     discord

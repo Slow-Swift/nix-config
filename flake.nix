@@ -53,7 +53,7 @@
     homeConfigurations = {
       ${username} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-	  extraSpecialArgs = { inherit inputs outputs; };
+	  extraSpecialArgs = { inherit inputs outputs username host; };
 	  modules = [ ./home/finian/${host}.nix ];
       };
     };
