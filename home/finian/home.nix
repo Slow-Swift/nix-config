@@ -8,7 +8,7 @@
 let
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-medium
-    todonotes csquotes import xifthen pdfpages transparent;
+    todonotes csquotes import xifthen pdfpages transparent ebgaramond fontaxes biblatex;
   });
 in
 {
@@ -24,8 +24,10 @@ in
   };
 
   home.packages = with pkgs; [
+    biber
+    obs-studio
+    gimp
     tex
-    unityhub
     libresprite
     audacity
     openxr-loader

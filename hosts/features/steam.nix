@@ -8,5 +8,9 @@
     protontricks.enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    lutris
+  ];
+
   hardware.steam-hardware.enable = true;
 }
