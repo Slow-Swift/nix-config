@@ -17,33 +17,40 @@
     auto-optimise-store = true;
   }; 
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelParams = [ ];
 
-    loader.efi.canTouchEfiVariables = true;
-    loader.systemd-boot.enable = true;
-    loader.timeout = 0;
+#  boot = {
+#    kernelPackages = pkgs.linuxPackages_lts;
+#    blacklistedKernelModules = [ "nvidia_wmi_ec_backlight" ]; # Added this to try and fix issues with rebooting
+#
+#    loader.efi.canTouchEfiVariables = true;
+#    loader.systemd-boot.enable = true;
+#    loader.timeout = 0;
     
     # Graphical Boot Animation
-    plymouth = {
-      enable = true;
-      theme = "rings";
-      themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override {
-          selected_themes = [ "rings" ];
-        })
-      ];
-    };
-
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "splash"
-      "boot.shell_on_fail"
-      "udev.log_priority=3"
-      "rd.systemd.show_status=auto"
-    ];
-  };
+#    plymouth = {
+#      enable = true;
+#      theme = "rings";
+#      themePackages = with pkgs; [
+#        (adi1090x-plymouth-themes.override {
+#          selected_themes = [ "rings" ];
+#        })
+#      ];
+#    };
+#
+#    initrd.verbose = false;
+#    kernelParams = [
+#      "quiet"
+#      "splash"
+#      "boot.shell_on_fail"
+#      "udev.log_priority=3"
+#      "rd.systemd.show_status=auto"
+#    ];
+#3  };
 
   networking.nameservers = [
     "1.1.1.1"

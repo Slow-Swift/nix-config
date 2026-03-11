@@ -11,7 +11,6 @@
   ];
 
   home.packages = with pkgs; [
-    kde-rounded-corners
     tela-circle-icon-theme
   ];
 

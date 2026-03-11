@@ -42,6 +42,12 @@
     packages = with pkgs; [];
   };
 
+  programs.neovim = {
+    enable = true;
+    withPython3 =true;
+  };
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -51,12 +57,11 @@
     usbutils
      dpkg
      alvr
-     neovim
      git
      jdk
      gcc
      unzip
-     python3
+     (pkgs.python3.withPackages (ps: with ps; [ pynvim ]))
      p7zip
   ];
 
