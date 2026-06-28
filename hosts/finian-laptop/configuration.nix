@@ -29,6 +29,8 @@
     ];
   };
 
+  virtualisation.docker.enable = true;
+
   networking.hostName = "finian-laptop"; # Define your hostname.
   
   # Set your time zone.
@@ -38,19 +40,51 @@
   users.users.finian = {
     isNormalUser = true;
     description = "Finian";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "adbusers"];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "adbusers" "docker" "input" ];
     packages = with pkgs; [];
   };
 
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
     withPython3 =true;
   };
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
+
+  services.ollama = {
+    enable = true;
+    host = "127.0.0.1";
+    port = 11434;
+    package = pkgs.ollama-cuda;
+  };
+  services.open-webui.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    ntfs3g
+    gh
+    lynx
+    file
+    sqlite
+    aider-chat
+    linuxConsoleTools
+    stylua
+    flightgear
+    nodejs
+    tree-sitter
+    clang-tools
+    wget
+    rshell
+    arduino-cli
+    geogebra
     libarchive
     unityhub
     libdvdcss
@@ -64,6 +98,10 @@
      (pkgs.python3.withPackages (ps: with ps; [ pynvim ]))
      p7zip
   ];
+
+  environment.sessionVariables = {
+    OLLAMA_API_BASE = "http://127.0.0.1:11434";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -1,5 +1,5 @@
 { pkgs, ... }:
 {
-  # Define any custome packages here
-  # my-package = pkgs.callPackage ./my-package {};
+  # Define any custom packages here
+  festival = pkgs.callPackage ./festival {};
 }

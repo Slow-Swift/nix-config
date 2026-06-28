@@ -23,7 +23,30 @@ in
     nix-direnv.enable = true;
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    withPython3 =true;
+
+    extraPython3Packages = ps: with ps; [
+      pynvim
+      setuptools
+    ];
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
+    shellWrapperName = "y";
+  };
+
   home.packages = with pkgs; [
+    ffmpeg
+    poppler
+    resvg
+
     biber
     obs-studio
     gimp
@@ -57,8 +80,6 @@ in
     (pkgs.writeShellScriptBin "new-java-project" (builtins.readFile ../scripts/new-java-project.sh))
   ];
   home.file = {};
-
-  home.sessionVariables = {};
 
   home.sessionPath = [
     "$HOME/.local/bin"
