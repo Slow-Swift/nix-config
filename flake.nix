@@ -3,7 +3,7 @@
   
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -32,11 +32,12 @@
     inherit (self) outputs;
 
     username = "finian";
+    user = "finian";
     host = "finian-laptop";
   in {
     nixosConfigurations = {
       ${host} = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs username host; };
+        specialArgs = { inherit inputs outputs user username host; };
         modules = [ ./hosts/${host} ];
       };
     };

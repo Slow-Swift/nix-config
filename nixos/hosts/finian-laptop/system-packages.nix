@@ -1,0 +1,39 @@
+{ pkgs, ... }: with pkgs; 
+[
+  unrar
+  dig
+  timetrap
+  activitywatch
+  droidcam
+  testdisk
+  dd_rescue
+  ntfs3g
+  gh
+  lynx
+  file
+  sqlite
+  aider-chat
+  linuxConsoleTools
+  stylua
+  flightgear
+  nodejs
+  tree-sitter
+  clang-tools
+  wget
+  rshell
+  arduino-cli
+  geogebra
+  libarchive
+  unityhub
+  libdvdcss
+  usbutils
+    vlc
+   dpkg
+   alvr
+   git
+   jdk
+   gcc
+   unzip
+   (pkgs.python3.withPackages (ps: with ps; [ pynvim ]))
+   p7zip
+];

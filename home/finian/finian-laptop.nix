@@ -23,7 +23,7 @@
     };
 
     programming = {
-      r.enable = true;
+      r.enable = false;
       gamedev.godot.enable = true;
     };
 

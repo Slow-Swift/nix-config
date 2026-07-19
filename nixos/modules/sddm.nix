@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 let
   sddm-astronaut = (pkgs.sddm-astronaut.override {
     embeddedTheme = "pixel_sakura";
@@ -14,9 +14,14 @@ let
   });
 in
 {
-  services = {
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm = {
+  meta = {};
+  imports = {};
+  options = {};
+
+  config = {
+    environment.systemPackages = [ sddm-astronaut ];
+
+    services.displayManager.sddm = {
       enable = true;
       wayland.enable = true;
       extraPackages = with pkgs; [
@@ -25,25 +30,4 @@ in
       theme = "sddm-astronaut-theme";
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    sddm-astronaut
-    kdePackages.discover
-    kdePackages.kcalc
-    kdePackages.kcharselect
-    kdePackages.kclock
-    kdePackages.kcolorchooser
-    kdePackages.ksystemlog
-    kdePackages.sddm-kcm
-    kdePackages.qtmultimedia
-    kdePackages.isoimagewriter
-    kdiff3
-    kdePackages.partitionmanager
-    hardinfo2
-    vlc
-    wayland-utils
-    xclip
-    wl-clipboard
-    libsForQt5.qtstyleplugin-kvantum
-  ];
 }

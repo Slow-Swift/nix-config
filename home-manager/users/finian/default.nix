@@ -1,46 +1,54 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
-let
+{ config, lib, pkgs, ... }: let 
+  username = "finian";
+  homeDirectory = "/home/${username}";
+  configHome = "${homeDirectory}/.config";
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-medium
     todonotes csquotes import xifthen pdfpages transparent ebgaramond fontaxes biblatex;
   });
-in
-{
-  imports = [ inputs.zen-browser.homeModules.twilight ];
+in {
+  imports = [
+    ../../common 
+    ../../features/cli
+    ../../features/games
+    ../../features/programming
+    ../../features/desktop/kde.nix
+    inputs.zen-browser.homeModules.twilight
+  ];
+  
+  features = {
+    cli = {
+      fish.enable = true;
+      fzf.enable = true;
+    };
 
-  home.username = lib.mkDefault "finian";
-  home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
+    games = {
+      minecraft.enable = true;
+      archipelago.enable = true;
+    };
+
+    programming = {
+      r.enable = false;
+      gamedev.godot.enable = true;
+    };
+
+  };
+
   fonts.fontconfig.enable = true;
 
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
-  #
-  # programs.neovim = {
-  #   enable = true;
-  #   defaultEditor = true;
-  #   viAlias = true;
-  #   vimAlias = true;
-  #   withPython3 =true;
-  #
-  #   extraPython3Packages = ps: with ps; [
-  #     pynvim
-  #     setuptools
-  #   ];
-  # };
-
+  
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
     shellWrapperName = "y";
   };
+
+  programs.home-manager.enable = true;
+  programs.zen-browser.enable = true;
 
   home.packages = with pkgs; [
     ffmpeg
@@ -79,15 +87,14 @@ in
     owmods-gui
     (pkgs.writeShellScriptBin "new-java-project" (builtins.readFile ../scripts/new-java-project.sh))
   ];
-  home.file = {};
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
+  home = {
+    inherit homeDirectory username;
 
-  programs.home-manager.enable = true;
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
 
-  programs.zen-browser.enable = true;
-
-  home.stateVersion = "25.05";
+    stateVersion = "25.05";
+  }
 }

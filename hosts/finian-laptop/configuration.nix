@@ -8,14 +8,13 @@
   imports =
     [
       ../nixosModules/common
-    
-      ./hardware-configuration.nix
       ../features/plasma.nix
       ../features/fcitx.nix
       ../features/hampster_bot.nix
       ../features/android.nix
       ../features/steam.nix
       ../features/syncthing.nix
+      ../features/tailscale.nix
     ];
 
     services.flatpak.enable = true;
@@ -28,6 +27,9 @@
       { from = 8000; to = 8010; }
     ];
   };
+  networking.nftables.enable = true;
+
+  hardware.xone.enable = true;
 
   virtualisation.docker.enable = true;
 
@@ -57,6 +59,8 @@
     openFirewall = true;
   };
 
+  programs.hamster.enable = true;
+  programs.gnome-disks.enable = true;
 
   services.ollama = {
     enable = true;
@@ -69,6 +73,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    unrar
+    dig
+    timetrap
+    activitywatch
+    droidcam
+    testdisk
+    dd_rescue
     ntfs3g
     gh
     lynx
