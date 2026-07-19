@@ -27,13 +27,13 @@
   unityhub
   libdvdcss
   usbutils
-    vlc
-   dpkg
-   alvr
-   git
-   jdk
-   gcc
-   unzip
-   (pkgs.python3.withPackages (ps: with ps; [ pynvim ]))
-   p7zip
-];
+  vlc
+  dpkg
+  alvr
+  git
+  jdk
+  gcc
+  unzip
+  (pkgs.python3.withPackages (ps: with ps; [ pynvim ]))
+  p7zip
+]

@@ -17,7 +17,7 @@
     ../../modules/pipewire.nix
     ../../modules/plasma.nix
     ../../modules/printing.nix
-    ../../modules/sddm.nix
+    ../../modules/sddm
     ../../modules/steam.nix
     ../../modules/syncthing.nix
     ../../modules/tailscale.nix
