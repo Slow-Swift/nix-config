@@ -1,3 +1,0 @@
-{
-  imports = [ ./finian.nix ];
-}

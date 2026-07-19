@@ -57,6 +57,10 @@
   networking.nftables.enable = true;
   services.resolved.enable = true;
 
+  # Shell
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
+
   # Localization
   i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "America/Vancouver";
