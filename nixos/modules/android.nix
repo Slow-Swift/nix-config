@@ -1,7 +1,7 @@
-{pkgs, ... }:
+{ config, pkgs, ... }:
 {
   meta = {};
-  imports = {};
+  imports = [];
   options = {};
 
   config = {

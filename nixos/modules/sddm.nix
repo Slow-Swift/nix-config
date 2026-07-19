@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   sddm-astronaut = (pkgs.sddm-astronaut.override {
     embeddedTheme = "pixel_sakura";
@@ -15,7 +15,7 @@ let
 in
 {
   meta = {};
-  imports = {};
+  imports = [];
   options = {};
 
   config = {

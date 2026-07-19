@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   meta = {};
-  imports = {};
+  imports = [];
   options = {};
 
   config.fonts = {

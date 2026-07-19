@@ -6,12 +6,9 @@ in {
   imports = [];
   
   options = {
-    services.syncthing = {
-      # already declared by nixos
-    };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     services.syncthing = {
       inherit user;
 
@@ -20,5 +17,5 @@ in {
       openDefaultPorts = true;
       group = "users";
     };
-  }
+  };
 }

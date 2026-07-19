@@ -35,19 +35,22 @@
     user = "finian";
     host = "finian-laptop";
   in {
-    nixosConfigurations = {
-      ${host} = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs user username host; };
-        modules = [ ./hosts/${host} ];
-      };
+    nixosConfigurations."finian-laptop" = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs outputs user username; };
+      modules = [ 
+        ./nixos/hosts/finian-laptop 
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.${user} = import ./home-manager/users/${user}/default.nix;
+          home-manager.extraSpecialArgs = { inherit inputs outputs user username; };
+        }
+      ];
     };
 
-    homeConfigurations = {
-      ${username} = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = { inherit inputs outputs username host; };
-        modules = [ ./home/finian/${host}.nix ];
-      };
+    homeConfigurations."${user}@finian-laptop" = home-manager.lib.homeManagerConfiguration {
+      extraSpecialArgs = { inherit inputs outputs username host; };
+      modules = [ ./home-manager/users/${user}/default.nix ];
     };
   };
 }

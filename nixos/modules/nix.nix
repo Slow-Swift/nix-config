@@ -1,8 +1,8 @@
-{ inputs, user, ... }:
+{ inputs, user, pkgs, ... }:
 {
   meta = {};
 
-  imports = {};
+  imports = [];
 
   options = {};
 

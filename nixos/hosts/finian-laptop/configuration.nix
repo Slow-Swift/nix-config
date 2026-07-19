@@ -13,7 +13,6 @@
     ../../modules/fcitx.nix
     ../../modules/fonts.nix
     ../../modules/localsend.nix
-    ../../modules/nix.nix
     ../../modules/nvim.nix
     ../../modules/pipewire.nix
     ../../modules/plasma.nix
@@ -53,8 +52,8 @@
       "8.8.8.8"
       "9.9.9.9"
     ];
+  };
 
-  }
   networking.nftables.enable = true;
   services.resolved.enable = true;
 
@@ -66,7 +65,7 @@
   services.printing.enable = true;
   services.devmon.enable = true;
   services.pipewire.enable = true;
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

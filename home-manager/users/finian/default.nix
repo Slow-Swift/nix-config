@@ -1,14 +1,12 @@
-{ config, lib, pkgs, ... }: let 
+{ config, lib, pkgs, inputs, ... }: let 
   username = "finian";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
-  tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive) scheme-medium
-    todonotes csquotes import xifthen pdfpages transparent ebgaramond fontaxes biblatex;
-  });
+  tex = (pkgs.texliveMedium.withPackages(ps: with ps; [
+    todonotes csquotes ps.import xifthen pdfpages transparent ebgaramond fontaxes biblatex
+  ]));
 in {
   imports = [
-    ../../common 
     ../../features/cli
     ../../features/games
     ../../features/programming
@@ -85,7 +83,7 @@ in {
     vscode.fhs
     logisim-evolution
     owmods-gui
-    (pkgs.writeShellScriptBin "new-java-project" (builtins.readFile ../scripts/new-java-project.sh))
+    (pkgs.writeShellScriptBin "new-java-project" (builtins.readFile ../../scripts/new-java-project.sh))
   ];
 
   home = {
@@ -96,5 +94,5 @@ in {
     ];
 
     stateVersion = "25.05";
-  }
+  };
 }

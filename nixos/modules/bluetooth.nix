@@ -3,7 +3,7 @@ with lib; let
   cfg = config.hardware.bluetooth;
 in {
   meta = {};
-  imports = {};
+  imports = [];
 
   options = {
     hardware.bluetooth = {};
