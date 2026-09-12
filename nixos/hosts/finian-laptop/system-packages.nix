@@ -1,5 +1,10 @@
 { pkgs, ... }: with pkgs; 
 [
+  jupyter
+  julia-bin
+  imagemagick
+  restic
+  tio
   unrar
   dig
   timetrap

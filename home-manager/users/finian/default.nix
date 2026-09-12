@@ -38,7 +38,7 @@ in {
     enable = true;
     nix-direnv.enable = true;
   };
-  
+
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
@@ -49,6 +49,12 @@ in {
   programs.zen-browser.enable = true;
 
   home.packages = with pkgs; [
+    nextcloud-client
+    easyeffects
+    arduino-ide
+    osu-lazer
+    zapzap
+    mesen
     ffmpeg
     poppler
     resvg

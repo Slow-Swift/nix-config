@@ -69,14 +69,16 @@
   services.printing.enable = true;
   services.devmon.enable = true;
   services.pipewire.enable = true;
-  # services.flatpak.enable = true;
+  services.flatpak.enable = true;
   virtualisation.docker.enable = true;
+
+  programs.nix-ld.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user} = {
     isNormalUser = true;
     description = "${user}";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "adbusers" "docker" "input" ];
+    extraGroups = [ "networkmanager" "dialout" "wheel" "kvm" "adbusers" "docker" "input" "disk" "cdrom" ];
     packages = with pkgs; [];
   };
 

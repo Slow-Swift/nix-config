@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  user,
   ...
 }:
 {
@@ -18,7 +19,10 @@
     enable = true;
 
     workspace = {
-      
+      wallpaperSlideShow = {
+        path = "/home/${user}/Pictures/Wallpaper";
+        interval = 15 * 60;
+      };
     };
 
     fonts = {
